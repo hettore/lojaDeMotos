@@ -1,6 +1,9 @@
-package entities;
+package desafiolojamotos;
 
 import java.util.Scanner;
+
+import entities.Cliente;
+import entities.Veiculo;
 
 public class Loja {
 	Scanner sc = new Scanner(System.in);
@@ -134,7 +137,7 @@ public class Loja {
 		case 1:
 			System.out.println();
 			System.out.println("Você esta escolhendo a moto: " + moto1);
-			System.out.printf("E o valor a ser pago será: %.2f%n ", moto1.preco);
+			System.out.printf("E o valor a ser pago será:  %.2f%n " , moto1.getPreco());
 
 			seguro();
 
@@ -143,27 +146,30 @@ public class Loja {
 
 			if (comSeguro.equals("s")) {
 
-				System.out.println("Insira seu nome:  ");
+				System.out.print("Insira seu nome:  ");
 				entities.Cliente.nome = sc.next();
-				System.out.println();
-				System.out.println("Insira seu e-mail: ");
+				
+				System.out.print("Insira seu e-mail: ");
 				entities.Cliente.email = sc.next();
 
 				System.out.println();
 				System.out.println("Você recebera um extrato com todas as informações! ");
 				System.out.println();
-				System.out.println("---------------------A seguir----------------------");
+				System.out.println("---------------------A seguir-----------------------");
 				System.out.println();
 				System.out.println("Comprador: " + Cliente.nome);
 				System.out.println("E-mail: " + Cliente.email);
-				System.out.printf(" Valor do veículo:     (+) R$ %.2f%n ", moto1.preco);
-				System.out.printf("I.P.V.A:              (-) R$ %.2f%n ", (moto1.preco * 4 / 100));
-				System.out.printf("Licenciamento:        (-) R$ %.2f%n ", motoComSeguro.licenciamento);
-				System.out.printf("Documento:            (-) R$ %.2f%n ", motoComSeguro.documento);
-				System.out.printf("SEGURO:               (+) R$ %.2f%n ", (moto1.preco * 1.5 / 100));
+				System.out.printf(" Valor do veículo:     (+) R$ %.2f%n ", moto1.getPreco());
+				System.out.printf("I.P.V.A:              (-)   R$ %.2f%n   ", (moto1.getPreco() * 4 / 100));
+				System.out.printf("Licenciamento:      (-)   R$ %.2f%n   ", motoComSeguro.getLicenciamento());
+				System.out.printf("Documento:          (-)   R$ %.2f%n   ", motoComSeguro.getDocumento());
+				System.out.printf("SEGURO:             (+)   R$ %.2f%n   ", (moto1.getPreco() * 1.5 / 100));
 				System.out.println();
 				System.out.println("-----------------------------------------------------");
-				System.out.printf("Total a ser pago:             R$ %.2f%n ", (moto1.preco + (moto1.preco * 1.5 / 100)));
+				System.out.printf("Total de descontos:    (-)   R$ %.2f%n ", ((moto1.getPreco() * 4 / 100)
+						+ motoComSeguro.getDocumento() + motoComSeguro.getLicenciamento()));
+				System.out.printf("Total a ser pago:         R$ %.2f%n ",
+						(moto1.getPreco() + (moto1.getPreco() * 1.5 / 100)));
 				agradecimento();
 
 			} else if (comSeguro.equals("n")) {
@@ -177,21 +183,22 @@ public class Loja {
 				System.out.println();
 				System.out.println("Você recebera um extrato com todas as informações! ");
 				System.out.println();
-				System.out.println("---------------------A seguir----------------------");
+				System.out.println("---------------------A seguir-----------------------");
 				System.out.println();
 				System.out.println(" Comprador: " + Cliente.nome);
 				System.out.println(" E-mail: " + Cliente.email);
-				System.out.printf(" Valor do veículo:     (+) R$ %.2f%n ", moto1.preco);
-				System.out.printf("I.P.V.A:              (+) R$ %.2f%n ", (moto1.preco * 4 / 100));
-				System.out.printf("Licenciamento:        (+) R$ %.2f%n ", motoComSeguro.licenciamento);
-				System.out.printf("Documento:            (+) R$ %.2f%n ", motoComSeguro.documento);
+				System.out.printf(" Valor do veículo:   (+) R$ %.2f%n ", moto1.getPreco());
+				System.out.printf("I.P.V.A:            (+)   R$ %.2f%n ", (moto1.getPreco() * 4 / 100));
+				System.out.printf("Licenciamento:      (+)   R$ %.2f%n ", motoComSeguro.getLicenciamento());
+				System.out.printf("Documento:          (+)   R$ %.2f%n ", motoComSeguro.getDocumento());
 				// System.out.printf("SEGURO: (+) R$ %.2f%n ", motoComSeguro.seguro);
 				System.out.println();
 				System.out.println("-----------------------------------------------------");
-				System.out.printf("Total a ser pago:               R$ %.2f%n ", (moto1.preco + motoComSeguro.documento
-						+ motoComSeguro.licenciamento + (moto1.preco * 4 / 100)));
+				System.out.printf("Total de descontos:          R$ %.2f%n ", 0.00);
+				System.out.printf("Total a ser pago:       R$ %.2f%n ",
+						(moto1.getPreco() + motoComSeguro.getDocumento() + motoComSeguro.getLicenciamento()
+								+ (moto1.getPreco() * 4 / 100)));
 				agradecimento();
-
 
 			} else {
 				System.out.println("por favor insira um valor válido");
@@ -202,7 +209,7 @@ public class Loja {
 		case 2:
 			System.out.println();
 			System.out.println("Você esta escolhendo a moto: " + moto2);
-			System.out.printf("E o valor a ser pago será: %.2f%n ", moto2.preco);
+			System.out.printf("E o valor a ser pago será: %.2f%n ", moto2.getPreco());
 
 			seguro();
 
@@ -224,16 +231,18 @@ public class Loja {
 				System.out.println();
 				System.out.println("Comprador: " + Cliente.nome);
 				System.out.println("E-mail: " + Cliente.email);
-				System.out.printf(" Valor do veículo:     (+) R$ %.2f%n ", moto2.preco);
-				System.out.printf("I.P.V.A:              (-) R$ %.2f%n ", (moto2.preco * 4 / 100));
-				System.out.printf("Licenciamento:        (-) R$ %.2f%n ", motoComSeguro.licenciamento);
-				System.out.printf("Documento:            (-) R$ %.2f%n ", motoComSeguro.documento);
-				System.out.printf("SEGURO:               (+) R$ %.2f%n ", (moto2.preco * 1.5 / 100));
+				System.out.printf(" Valor do veículo:   (+) R$ %.2f%n ", moto2.getPreco());
+				System.out.printf("I.P.V.A:            (-)   R$ %.2f%n ", (moto2.getPreco() * 4 / 100));
+				System.out.printf("Licenciamento:      (-)   R$ %.2f%n ", motoComSeguro.getLicenciamento());
+				System.out.printf("Documento:          (-)   R$ %.2f%n ", motoComSeguro.getDocumento());
+				System.out.printf("SEGURO:             (+)   R$ %.2f%n ", (moto2.getPreco() * 1.5 / 100));
 				System.out.println();
 				System.out.println("-----------------------------------------------------");
-				System.out.printf("Total a ser pago:             R$ %.2f%n ", ((moto2.preco * 1.5 / 100) + moto2.preco));
+				System.out.printf("Total de descontos:  (-)  R$ %.2f%n ", ((moto2.getPreco() * 4 / 100)
+						+ motoComSeguro.getDocumento() + motoComSeguro.getLicenciamento()));
+				System.out.printf("Total a ser pago:       R$ %.2f%n ",
+						((moto2.getPreco() * 1.5 / 100) + moto2.getPreco()));
 				agradecimento();
-
 
 			} else if (comSeguro2.equals("n")) {
 
@@ -250,17 +259,18 @@ public class Loja {
 				System.out.println();
 				System.out.println(" Comprador: " + Cliente.nome);
 				System.out.println(" E-mail: " + Cliente.email);
-				System.out.printf(" Valor do veículo:     (+) R$ %.2f%n ", moto2.preco);
-				System.out.printf("I.P.V.A:              (+) R$ %.2f%n ", (moto2.preco * 4 / 100));
-				System.out.printf("Licenciamento:        (+) R$ %.2f%n ", motoComSeguro.licenciamento);
-				System.out.printf("Documento:            (+) R$ %.2f%n ", motoComSeguro.documento);
+				System.out.printf(" Valor do veículo:   (+) R$ %.2f%n ", moto2.getPreco());
+				System.out.printf("I.P.V.A:            (+)   R$ %.2f%n ", (moto2.getPreco() * 4 / 100));
+				System.out.printf("Licenciamento:      (+)   R$ %.2f%n ", motoComSeguro.getLicenciamento());
+				System.out.printf("Documento:          (+)   R$ %.2f%n ", motoComSeguro.getDocumento());
 				// System.out.printf("SEGURO: (+) R$ %.2f%n ", motoComSeguro.seguro);
 				System.out.println();
 				System.out.println("-----------------------------------------------------");
-				System.out.printf("Total a ser pago:               R$ %.2f%n ", (moto2.preco + motoComSeguro.documento
-						+ motoComSeguro.licenciamento + (moto2.preco * 4 / 100)));
+				System.out.printf("Total de descontos:          R$ %.2f%n ", 0.00);
+				System.out.printf("Total a ser pago:       R$ %.2f%n ",
+						(moto2.getPreco() + motoComSeguro.getDocumento() + motoComSeguro.getLicenciamento()
+								+ (moto2.getPreco() * 4 / 100)));
 				agradecimento();
-
 
 			} else {
 				System.out.println("por falor insira um valor válido");
@@ -272,7 +282,7 @@ public class Loja {
 
 			System.out.println();
 			System.out.println("Você esta escolhendo a moto: " + moto3);
-			System.out.printf("E o valor a ser pago será: %.2f%n ", moto3.preco);
+			System.out.printf("E o valor a ser pago será: %.2f%n ", moto3.getPreco());
 
 			seguro();
 
@@ -294,14 +304,17 @@ public class Loja {
 				System.out.println();
 				System.out.println("Comprador: " + Cliente.nome);
 				System.out.println("E-mail: " + Cliente.email);
-				System.out.printf(" Valor do veículo:     (+) R$ %.2f%n ", moto3.preco);
-				System.out.printf("I.P.V.A:              (-) R$ %.2f%n ", (moto3.preco * 4 / 100));
-				System.out.printf("Licenciamento:        (-) R$ %.2f%n ", motoComSeguro.licenciamento);
-				System.out.printf("Documento:            (-) R$ %.2f%n ", motoComSeguro.documento);
-				System.out.printf("SEGURO:               (+) R$ %.2f%n ", (moto3.preco * 1.5 / 100));
+				System.out.printf(" Valor do veículo:   (+) R$ %.2f%n ", moto3.getPreco());
+				System.out.printf("I.P.V.A:            (-)  R$ %.2f%n ", (moto3.getPreco() * 4 / 100));
+				System.out.printf("Licenciamento:      (-)   R$ %.2f%n ", motoComSeguro.getLicenciamento());
+				System.out.printf("Documento:          (-)   R$ %.2f%n ", motoComSeguro.getDocumento());
+				System.out.printf("SEGURO:             (+)   R$ %.2f%n ", (moto3.getPreco() * 1.5 / 100));
 				System.out.println();
 				System.out.println("-----------------------------------------------------");
-				System.out.printf("Total a ser pago:             R$ %.2f%n ", ((moto3.preco * 1.5 / 100) + moto3.preco));
+				System.out.printf("Total de descontos:       R$ %.2f%n ", ((moto3.getPreco() * 4 / 100)
+						+ motoComSeguro.getDocumento() + motoComSeguro.getLicenciamento()));
+				System.out.printf("Total a ser pago:       R$ %.2f%n ",
+						((moto3.getPreco() * 1.5 / 100) + moto3.getPreco()));
 				agradecimento();
 
 			} else if (comSeguro3.equals("n")) {
@@ -319,15 +332,17 @@ public class Loja {
 				System.out.println();
 				System.out.println(" Comprador: " + Cliente.nome);
 				System.out.println(" E-mail: " + Cliente.email);
-				System.out.printf(" Valor do veículo:     (+) R$ %.2f%n ", moto3.preco);
-				System.out.printf("I.P.V.A:              (+) R$ %.2f%n ", (moto3.preco * 4 / 100));
-				System.out.printf("Licenciamento:        (+) R$ %.2f%n ", motoComSeguro.licenciamento);
-				System.out.printf("Documento:            (+) R$ %.2f%n ", motoComSeguro.documento);
+				System.out.printf(" Valor do veículo:   (+) R$ %.2f%n ", moto3.getPreco());
+				System.out.printf("I.P.V.A:            (+)  R$ %.2f%n ", (moto3.getPreco() * 4 / 100));
+				System.out.printf("Licenciamento:      (+)   R$ %.2f%n ", motoComSeguro.getLicenciamento());
+				System.out.printf("Documento:          (+)   R$ %.2f%n ", motoComSeguro.getDocumento());
 				// System.out.printf("SEGURO: (+) R$ %.2f%n ", motoComSeguro.seguro);
 				System.out.println();
 				System.out.println("-----------------------------------------------------");
-				System.out.printf("Total a ser pago:               R$ %.2f%n ", (moto3.preco + motoComSeguro.documento
-						+ motoComSeguro.licenciamento + (moto3.preco * 4 / 100)));
+				System.out.printf("Total de descontos:          R$ %.2f%n ", 0.00);
+				System.out.printf("Total a ser pago:       R$ %.2f%n ",
+						(moto3.getPreco() + motoComSeguro.getDocumento() + motoComSeguro.getLicenciamento()
+								+ (moto3.getPreco() * 4 / 100)));
 				agradecimento();
 
 			} else {
@@ -360,7 +375,7 @@ public class Loja {
 		System.out.println("É muito importante contratar um Seguro!");
 		System.out.println("--------------------------------------------");
 		System.out.println("Valor a ser pago: (taxa única anual)");
-		System.out.println("Por apenas 1,5% do valor total do veículo." );
+		System.out.println("Por apenas 1,5% do valor total do veículo.");
 		System.out.println("--------------------------------------------");
 		System.out.println("Descontos:");
 		System.out.println("IPVA ");
@@ -368,7 +383,7 @@ public class Loja {
 		System.out.println("Documentação ");
 
 	}
-	
+
 	public void agradecimento() {
 		System.out.println();
 		System.out.println("Parabéns pela escolha, a MotosMotors agradece a preferência.");

@@ -2,15 +2,15 @@ package entities;
 
 public class Veiculo {
 
-	public String fabricante;
-	public String modelo;
-	public int ano;
-	double preco;
+	private String fabricante;
+	private String modelo;
+	private int ano;
+	private double preco;
 	
-	double seguro;
-	double ipva;
-	double licenciamento;
-	double documento;
+	private double seguro;
+	private double ipva;
+	private double licenciamento;
+	private double documento;
 
 	public Veiculo(String fabricante, String modelo, int ano, double preco, double seguro, double ipva, double licenciamento, double documento) {
 		this.fabricante = fabricante;
@@ -60,12 +60,12 @@ public class Veiculo {
 		this.ano = ano;
 	}
 
-	public int getPreco() {
-		return ano;
+	public double getPreco() {
+		return preco;
 	}
 
-	public void setPreco(int ano) {
-		this.ano = ano;
+	public void setPreco(double preco) {
+		this.preco = preco;
 	}
 	
 	
