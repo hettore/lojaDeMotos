@@ -1,12 +1,10 @@
 package entities;
 
-import java.util.Scanner;
-
 public class Cliente {
-	
+
 	public static String nome;
 	public static String email;
-	
+
 	public Cliente(String nome, String email) {
 		Cliente.nome = nome;
 		Cliente.email = email;
@@ -27,10 +25,9 @@ public class Cliente {
 	public void setEmail(String email) {
 		Cliente.email = email;
 	}
-	
 
-		//Cliente cliente1 = new Cliente(sc.nextLine(), sc.nextLine());
-	
-	//sc.close();
+	// Cliente cliente1 = new Cliente(sc.nextLine(), sc.nextLine());
+
+	// sc.close();
 
 }
