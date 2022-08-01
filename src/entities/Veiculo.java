@@ -111,7 +111,7 @@ public class Veiculo {
 
 
 	public String toString() {
-		return "Veiculo " 
+		return "Veículo " 
 				+ fabricante 
 				+ modelo 
 				+ ano 
